@@ -1,3 +1,10 @@
+let startingBackground = 'background-color:' + randomColor();
+
+createBoard(42);
+createGrid(42);
+activateItems();
+
+
 function createBoard(side){
     let newBoard = document.createElement("div");
     let gridStyle = 'grid-template-columns: repeat(' + side + ', 1fr);grid-template-rows: repeat(' + side + ',1fr);';
@@ -13,23 +20,20 @@ function createGrid(side){
     for(i=0;i<number;i++){
     let newDiv = document.createElement("div");
     newDiv.classList.add("grid-item");
+    newDiv.style = startingBackground;
     board.appendChild(newDiv);
     }
 }
 
 function removeBoard(){
     let board = document.querySelector(".board");
-    console.log(board)
     board.remove();
 }
-createBoard(42)
-createGrid(42)
 
-let slider = document.getElementById("myRange");
-let output = document.getElementById("demo");
-output.innerText = slider.value; // Display the default slider value
+let slider = document.getElementById("boardSize");
+let output = document.getElementById("sideDisplay");
 
-// Update the current slider value (each time you drag the slider handle)
+
 slider.oninput = function() {
   output.innerText = this.value;
     removeBoard();
@@ -38,12 +42,61 @@ slider.oninput = function() {
     activateItems();
 }
 
-let gridItem;
-activateItems();
+
+let clearBtn = document.getElementById("clear");
+clearBtn.addEventListener('click', event => {
+    clearBoard();
+});
+
+function clearBoard(){
+  sideNum = output.innerText;
+  removeBoard();
+  createBoard(sideNum);
+  createGrid(sideNum);
+  activateItems();
+}
+
+let randomizeBtn = document.getElementById("randomize");
+randomizeBtn.addEventListener('click', event => {
+  currentColor = randomColor();
+  startingBackground = 'background-color:' + randomColor();
+  clearBoard();
+});
+
+function clearBoard(){
+  sideNum = output.innerText;
+  removeBoard();
+  createBoard(sideNum);
+  createGrid(sideNum);
+  activateItems();
+}
+
+
+
 function activateItems(){
+    let gridItem;
     gridItem = document.querySelectorAll("div.grid-item");
     gridItem.forEach(gridItem => gridItem.addEventListener('mouseover', event => {
-    event.target.style.backgroundColor = "orange";;
+    event.target.style.backgroundColor = drawColor();
   }));
 };
 
+function randomColor(){
+  let r = Math.floor(Math.random() * 256)
+  let g = Math.floor(Math.random() * 256)
+  let b = Math.floor(Math.random() * 256)
+  return 'rgb(' + r + ', ' + g + ', ' + b + ')'
+}
+
+let currentColor = randomColor();
+
+function randomize() {
+  currentColor = randomColor()
+
+}
+function drawColor(){
+  let random = document.getElementById("random").checked;
+  if (random === true){
+    return randomColor();
+  } else return currentColor;
+}
