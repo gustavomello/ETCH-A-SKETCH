@@ -10,10 +10,22 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    max-width: 100%;
 }
+.aspectwrapper{
+    display: inline-block;
+    width: 95%;
+    max-width: 800px;
+    position: relative;  
+}
+.aspectwrapper:after {
+    padding-top: 100%; /* percentage of containing block _width_ */
+    display: block;
+    content: '';
+  }
 .board{
-    width: 800px;
-    height: 800px;
+    position: absolute;
+    top: 0; bottom: 0; right: 0; left: 0;
     display: grid;
 }
 .title{
@@ -21,13 +33,15 @@ body{
     padding:40px 0 20px 0;
 }
 .options{
+    max-width:800px;
     display: flex;
+    flex-wrap: wrap;
     padding:0 0 20px 0;
     justify-content: center;
     align-items: center;
 }
 #sideDisplay{
-    padding: 0 20px 0 20px;
+    padding: 0 10px 0 10px;
     color:white;
 
 }
@@ -35,22 +49,28 @@ body{
     color: white;
     text-align: center;
     font-size: 16px;
+
     opacity: 0.6;
     transition: 0.3s;
-    display: inline-block;
+    display: flex;
     text-decoration: none;
     cursor: pointer;
-    padding: 0 20px 0 0;
+    padding: 0 10px 0 10px;
   }
-  
-  .button:hover {opacity: 1}
+#random{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.button:hover {opacity: 1}
 
-  .button:active {
+.button:active {
     color:#2c2c32;
-  }
-  .random{
+}
+
+.random{
     color: white;
     text-align: center;
     font-size: 16px;
     opacity: 0.6;
-  }
+}

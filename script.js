@@ -6,11 +6,12 @@ activateItems();
 
 
 function createBoard(side){
+    const wrapper = document.querySelector('.aspectwrapper');
     let newBoard = document.createElement("div");
     let gridStyle = 'grid-template-columns: repeat(' + side + ', 1fr);grid-template-rows: repeat(' + side + ',1fr);';
     newBoard.classList.add("board");
     newBoard.style = gridStyle;
-    document.body.appendChild(newBoard);
+    wrapper.appendChild(newBoard);
     
 }
 
@@ -72,14 +73,20 @@ function clearBoard(){
 }
 
 
+function drawColor (event) {
+  event.target.style.backgroundColor = brushColor();
+}
 
 function activateItems(){
     let gridItem;
     gridItem = document.querySelectorAll("div.grid-item");
-    gridItem.forEach(gridItem => gridItem.addEventListener('mouseover', event => {
-    event.target.style.backgroundColor = drawColor();
-  }));
+    gridItem.forEach(gridItem => gridItem.addEventListener('mouseover', drawColor));
+    gridItem.forEach(gridItem => gridItem.addEventListener('touchstart', drawColor));
+    gridItem.forEach(gridItem => gridItem.addEventListener('touchmove', drawColor));
+    gridItem.forEach(gridItem => gridItem.addEventListener('touchend', drawColor));
 };
+
+
 
 function randomColor(){
   let r = Math.floor(Math.random() * 256)
@@ -94,7 +101,7 @@ function randomize() {
   currentColor = randomColor()
 
 }
-function drawColor(){
+function brushColor(){
   let random = document.getElementById("random").checked;
   if (random === true){
     return randomColor();
