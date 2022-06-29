@@ -77,16 +77,28 @@ function drawColor (event) {
   event.target.style.backgroundColor = brushColor();
 }
 
+function touchDrawColor (target) {
+  target.style.backgroundColor = brushColor();
+}
+
 function activateItems(){
     let gridItem;
     gridItem = document.querySelectorAll("div.grid-item");
     gridItem.forEach(gridItem => gridItem.addEventListener('mouseover', drawColor));
-    gridItem.forEach(gridItem => gridItem.addEventListener('touchstart', drawColor));
-    gridItem.forEach(gridItem => gridItem.addEventListener('touchmove', drawColor));
-    gridItem.forEach(gridItem => gridItem.addEventListener('touchend', drawColor));
+    gridItem.forEach(gridItem => gridItem.addEventListener('touchstart', paintTouch));
+    gridItem.forEach(gridItem => gridItem.addEventListener('touchmove', paintTouch));
+    gridItem.forEach(gridItem => gridItem.addEventListener('touchend', paintTouch));
 };
 
+function paintTouch(e) {
 
+  let myLocation = e.changedTouches[0];
+  let realTarget = document.elementFromPoint(myLocation.clientX, myLocation.clientY);
+  if(
+    realTarget.classList.contains('grid-item')
+  ){touchDrawColor(realTarget)};
+
+}
 
 function randomColor(){
   let r = Math.floor(Math.random() * 256)

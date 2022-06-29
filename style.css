@@ -14,7 +14,7 @@ body{
 }
 .aspectwrapper{
     display: inline-block;
-    width: 95%;
+    width: 94%;
     max-width: 800px;
     position: relative;  
 }
@@ -33,10 +33,10 @@ body{
     padding:40px 0 20px 0;
 }
 .options{
-    max-width:800px;
+    max-width:94%;
     display: flex;
     flex-wrap: wrap;
-    padding:0 0 20px 0;
+    padding:0 0 10px 0;
     justify-content: center;
     align-items: center;
 }
@@ -45,17 +45,21 @@ body{
     color:white;
 
 }
+.sliderwrapper{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
 .button {
     color: white;
-    text-align: center;
     font-size: 16px;
-
     opacity: 0.6;
     transition: 0.3s;
     display: flex;
     text-decoration: none;
     cursor: pointer;
-    padding: 0 10px 0 10px;
+    padding: 5px 10px 5px 10px;
+
   }
 #random{
     -webkit-appearance: none;
